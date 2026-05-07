@@ -57,10 +57,7 @@ export default function Home() {
     </main>
   );
 }
-
-// Actualizamos el componente para recibir el color personalizado
 function LinkCard({ title, url, colorClass }: { title: string, url: string, colorClass?: string }) {
-  // Si no se pasa un colorClass, usa el diseño blanco por defecto
   const defaultClass = "bg-white border-[#E2DFD8] text-[#2C2C2C] hover:border-[#D1CEC7]";
   const appliedClass = colorClass || defaultClass;
 
