@@ -1,65 +1,77 @@
-import Image from "next/image";
+import Link from 'next/link';
+import Image from 'next/image';
+import { Inter, Lora } from 'next/font/google';
+
+// Fuentes
+const inter = Inter({ subsets: ['latin'] });
+const lora = Lora({ subsets: ['latin'], style: ['normal', 'italic'] });
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
+    <main className={`min-h-screen bg-[#F9F8F6] text-[#2C2C2C] flex flex-col items-center py-20 px-4 selection:bg-[#E2DFD8] ${inter.className}`}>
+      
+      {/* Sección de Perfil */}
+      <div className="text-center mb-12">
+        <div className="relative w-28 h-28 mx-auto mb-5">
+          <Image 
+            src="/perfil.jpg"
+            alt="Jonathan"
+            fill
+            className="rounded-full object-cover shadow-md border-2 border-[#E2DFD8]"
+            priority
+          />
+        </div> 
+
+        <h1 className={`text-3xl md:text-4xl font-bold mb-3 tracking-tight ${lora.className}`}>
+          Jonathan Baltodano
+        </h1>
+        <p className="text-[#595959] text-lg max-w-md mx-auto font-light">
+          Ingeniero en Sistemas | Desarrollador | Escritor
+        </p>
+      </div>
+
+      {/* Sección de Enlaces con colores oficiales */}
+      <div className="w-full max-w-md flex flex-col gap-4">
+        <LinkCard 
+          title="Mi Portafolio (Proyectos)" 
+          url="https://jonathanb-portafolio-s5qd.vercel.app/" 
+          colorClass="bg-[#a1cda8] text-white hover:bg-[#627264] border-transparent"
         />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
-        </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+        <LinkCard 
+          title="GitHub" 
+          url="https://github.com/Alexxxx168" 
+          colorClass="bg-[#24292e] text-white hover:bg-black border-transparent"
+        />
+        <LinkCard 
+          title="Substack" 
+          url="https://substack.com/@alexdrafts" 
+          colorClass="bg-[#FF6719] text-white hover:bg-[#E55C16] border-transparent"
+        />
+        <LinkCard 
+          title="LinkedIn" 
+          url="https://www.linkedin.com/in/jonathan-baltodano-05b692317/" 
+          colorClass="bg-[#0A66C2] text-white hover:bg-[#084e96] border-transparent"
+        />
+      </div>
+
+    </main>
+  );
+}
+
+// Actualizamos el componente para recibir el color personalizado
+function LinkCard({ title, url, colorClass }: { title: string, url: string, colorClass?: string }) {
+  // Si no se pasa un colorClass, usa el diseño blanco por defecto
+  const defaultClass = "bg-white border-[#E2DFD8] text-[#2C2C2C] hover:border-[#D1CEC7]";
+  const appliedClass = colorClass || defaultClass;
+
+  return (
+    <a
+      href={url}
+      target="_blank"
+      rel="noopener noreferrer"
+      className={`block w-full text-center p-4 border rounded-xl shadow-sm hover:shadow-md hover:-translate-y-1 transition-all duration-300 font-medium ${appliedClass}`}
+    >
+      {title}
+    </a>
   );
 }
